@@ -1,4 +1,5 @@
 const loadHubs = async() =>{
+    toggleSpinner(true);
     const url = `https://openapi.programming-hero.com/api/ai/tools`
     const res = await fetch(url);
     const data = await res.json();
@@ -6,9 +7,7 @@ const loadHubs = async() =>{
 }
 
 // displaying all hubs 
-
 const displayHubs = hubs =>{
-    // console.log(hubs);
     const hubsContainer = document.getElementById('hubs-container');
     for(const data of hubs){
         console.log(data.features);
@@ -32,7 +31,7 @@ const displayHubs = hubs =>{
                             <i class="fa-solid fa-calendar-days"></i> ${data.published_in}
                         </div>
                     </div>
-                    <button onclick="" class="bg-red-300 text-red-500 p-1 rounded-full hover:bg-slate-200 fa-solid fa-arrow-right"></button>
+                    <label for="my-modal-5" btn onclick="" class="bg-red-300 text-red-500 p-1 rounded-full hover:bg-slate-200 fa-solid fa-arrow-right"></label>
                 
                 </div>
             </div
@@ -47,10 +46,22 @@ const displayHubs = hubs =>{
                 featureContainer.appendChild(featureList);
             })
 
+            toggleSpinner(false);
     }
     // datas.forEach(data =>{});
 }
 
+// loading function 
+const toggleSpinner = isLoading => {
+    const loaderSection = document.getElementById('spinner');
+    if(isLoading){
+        loaderSection.classList.remove('hidden')
+    }
+    else{
+        loaderSection.classList.add('hidden');
+    }
+}
 
 
+// calling loadHubs 
 loadHubs ();
