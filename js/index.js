@@ -10,7 +10,7 @@ const loadHubs = async() =>{
 const displayHubs = hubs =>{
     const hubsContainer = document.getElementById('hubs-container');
     for(const data of hubs){
-        console.log(data.features);
+        // console.log(data.id);
 
         const hubsDiv  = document.createElement('div');
         hubsDiv.classList.add("card", "w-96", "bg-base-100", "shadow-xl", "border", "p-3");
@@ -31,7 +31,7 @@ const displayHubs = hubs =>{
                             <i class="fa-solid fa-calendar-days"></i> ${data.published_in}
                         </div>
                     </div>
-                    <label for="my-modal-5" btn onclick="" class="bg-red-300 text-red-500 p-1 rounded-full hover:bg-slate-200 fa-solid fa-arrow-right"></label>
+                    <label for="my-modal-5" btn onclick="fetchModalData(${'data.id'})" class="bg-red-300 text-red-500 p-1 rounded-full hover:bg-slate-200 fa-solid fa-arrow-right"></label>
                 
                 </div>
             </div
@@ -49,6 +49,11 @@ const displayHubs = hubs =>{
             toggleSpinner(false);
     }
     // datas.forEach(data =>{});
+}
+
+// fetching data for moda 
+const fetchModalData = data_id =>{
+    console.log(data.id)
 }
 
 // loading function 
