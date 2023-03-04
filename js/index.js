@@ -10,13 +10,13 @@ const loadHubs = async() =>{
 const displayHubs = hubs =>{
     const processShow = () =>{
         const showButton = document.getElementById('show-all');
-        hubs = hubs.slice(0, 6);
         if(hubs.length > 6) {
             hubs = hubs.slice(0, 6);
-            showButton.classList.remove('hidden');
+            showButton.classList.remove("hidden");
         }
         else{
-            showButton.classList.add('hidden');
+            hubs = hubs.slice(0, 6);
+            showButton.classList.add("hidden");
         }
         }
 
@@ -96,8 +96,8 @@ const displayModalInfo = data =>{
                 <h3 class="font-bold text-left">${data.description}</h3>
                 <div class="flex justify-between items-center gap-3 my-5">
                   <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[0].price ? data.pricing[0].price : "Free Of Cost"}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[0].plan}</h6></div>
-                  <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[1].price ? data.pricing[0].price : "Free Of Cost"}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[1].plan}</h6></div>
-                  <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[2].price ? data.pricing[0].price : "Free Of Cost"}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[2].plan}</h6></div>
+                  <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[1].price ? data.pricing[1].price : "Free Of Cost"}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[1].plan}</h6></div>
+                  <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[2].price ? data.pricing[2].price : "Free Of Cost"}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[2].plan}</h6></div>
                 </div>
                 <div class="flex justify-between items-center">
                   <div>
