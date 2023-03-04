@@ -84,7 +84,6 @@ const displayModalInfo = data =>{
 
     console.log(data);
     const modalContainer = document.getElementById('modal-container');
-    modalContainer.innerHTML = "";
     const modalDiv = document.createElement('div');
     modalDiv.innerHTML = `
     <input type="checkbox" id="my-modal-5" class="modal-toggle" />
@@ -96,9 +95,9 @@ const displayModalInfo = data =>{
               <div class="w-1/2 bg-red-100 p-6 rounded-2xl">
                 <h3 class="font-bold text-left">${data.description}</h3>
                 <div class="flex justify-between items-center gap-3 my-5">
-                  <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[0].price}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[0].plan}</h6></div>
-                  <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[1].price}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[1].plan}</h6></div>
-                  <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[2].price}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[2].plan}</h6></div>
+                  <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[0].price ? data.pricing[0].price : "Free Of Cost"}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[0].plan}</h6></div>
+                  <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[1].price ? data.pricing[0].price : "Free Of Cost"}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[1].plan}</h6></div>
+                  <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[2].price ? data.pricing[0].price : "Free Of Cost"}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[2].plan}</h6></div>
                 </div>
                 <div class="flex justify-between items-center">
                   <div>
@@ -111,16 +110,22 @@ const displayModalInfo = data =>{
                   </div>
                   <div>
                     <h5 class="text-lg font-bold">Integrations</h5>
-                    <ul id="">
-                      
+                    <ul>
+                        <li>${data.integrations[0] ? data.integrations[0] : "sorry! no data availabel"}</li>
+                        <li>${data.integrations[1] ? data.integrations[1] : "sorry! no data availabel"}</li>
+                        <li>${data.integrations[2] ? data.integrations[2] : "sorry! no data availabel"}</li>
+                        <li>${data.integrations[3] ? data.integrations[3] : "sorry! no data availabel"}</li>
                     </ul>
                   </div>
                 </div>
               </div>
               <div class="w-1/2 rounded-2xl p-4 bg-slate-300">
-                <img class="h-2/3 rounded-2xl" src="${data.image_link[0]}" alt="">
+                <div class="">
+                <p class="absolute z-10 bg-red-300 w-1/6 text-center right-12 rounded p-1">${data.accuracy.score} %accuracy</p>
+                <img class="h-2/3 rounded-2xl relative" src="${data.image_link[0]}" alt="">
+                </div>
                 <h5 class="text-lg font-bold text-center mt-2">${data.input_output_examples[0].input}</h5>
-                <p class="text-center mt-2">${data.input_output_examples[1].input}</p>
+                <p class="text-center mt-2">${data.input_output_examples[1].input ? data.input_output_examples[1].input : "No! Not Yet! Take a break!!!"}</p>
               </div>
             </div>
             <!-- modal action button  -->
