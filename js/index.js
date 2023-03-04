@@ -11,6 +11,15 @@ const displayHubs = hubs =>{
     const hubsContainer = document.getElementById('hubs-container');
     for(const data of hubs){
         // console.log(data);
+        // display 10 phones only 
+        const showAll = document.getElementById('show-all');
+        if(hubs.length > 6) {
+            hubs = hubs.slice(0, 6);
+            showAll.classList.remove('hidden');
+        }
+        else{
+            showAll.classList.add('hidden');
+        }
 
         const hubsDiv  = document.createElement('div');
         hubsDiv.classList.add("card", "w-96", "bg-base-100", "shadow-xl", "border", "p-3");
@@ -95,7 +104,7 @@ const displayModalInfo = data =>{
                   </div>
                   <div>
                     <h5 class="text-lg font-bold">Integrations</h5>
-                    <ul>
+                    <ul id="">
                       
                     </ul>
                   </div>
