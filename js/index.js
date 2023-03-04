@@ -8,19 +8,22 @@ const loadHubs = async() =>{
 
 // displaying all hubs 
 const displayHubs = hubs =>{
+    const processShow = () =>{
+        const showButton = document.getElementById('show-all');
+        hubs = hubs.slice(0, 6);
+        if(hubs.length > 6) {
+            hubs = hubs.slice(0, 6);
+            showButton.classList.remove('hidden');
+        }
+        else{
+            showButton.classList.add('hidden');
+        }
+        }
+
     const hubsContainer = document.getElementById('hubs-container');
     for(const data of hubs){
         // console.log(data);
-        // display 10 phones only 
-        const showAll = document.getElementById('show-all');
-        if(hubs.length > 6) {
-            hubs = hubs.slice(0, 6);
-            showAll.classList.remove('hidden');
-        }
-        else{
-            showAll.classList.add('hidden');
-        }
-
+        // display 6 tools only 
         const hubsDiv  = document.createElement('div');
         hubsDiv.classList.add("card", "w-96", "bg-base-100", "shadow-xl", "border", "p-3");
         
@@ -60,6 +63,10 @@ const displayHubs = hubs =>{
     // datas.forEach(data =>{});
 }
 
+// document.getElementById('btn-show-all').addEventListener('click', function(){
+    
+// })
+
 // fetching data for modal
 // --------------------------------------------
 const fetchModalInfo = data =>{
@@ -76,8 +83,8 @@ const fetchModalInfo = data =>{
 const displayModalInfo = data =>{
 
     console.log(data);
-    
     const modalContainer = document.getElementById('modal-container');
+    modalContainer.innerHTML = "";
     const modalDiv = document.createElement('div');
     modalDiv.innerHTML = `
     <input type="checkbox" id="my-modal-5" class="modal-toggle" />
