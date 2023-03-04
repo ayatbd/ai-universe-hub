@@ -10,7 +10,7 @@ const loadHubs = async() =>{
 const displayHubs = hubs =>{
     const hubsContainer = document.getElementById('hubs-container');
     for(const data of hubs){
-        // console.log(data.id);
+        // console.log(data);
 
         const hubsDiv  = document.createElement('div');
         hubsDiv.classList.add("card", "w-96", "bg-base-100", "shadow-xl", "border", "p-3");
@@ -31,7 +31,7 @@ const displayHubs = hubs =>{
                             <i class="fa-solid fa-calendar-days"></i> ${data.published_in}
                         </div>
                     </div>
-                    <label for="my-modal-5" btn onclick="fetchModalData(${'data.id'})" class="bg-red-300 text-red-500 p-1 rounded-full hover:bg-slate-200 fa-solid fa-arrow-right"></label>
+                    <label for="my-modal-5" btn onclick="fetchModalInfo('${(data.id)}')" class="bg-red-300 text-red-500 p-1 rounded-full hover:bg-slate-200 fa-solid fa-arrow-right"></label>
                 
                 </div>
             </div
@@ -51,10 +51,74 @@ const displayHubs = hubs =>{
     // datas.forEach(data =>{});
 }
 
-// fetching data for moda 
-const fetchModalData = data_id =>{
-    console.log(data.id)
+// fetching data for modal
+// --------------------------------------------
+const fetchModalInfo = data =>{
+    // console.log(data);
+    const url = `https://openapi.programming-hero.com/api/ai/tool/${data}`
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayModalInfo(data.data))
 }
+
+// displaying modal info
+// ---------------------------------------
+
+const displayModalInfo = data =>{
+
+    console.log(data);
+    
+    const modalContainer = document.getElementById('modal-container');
+    const modalDiv = document.createElement('div');
+    modalDiv.innerHTML = `
+    <input type="checkbox" id="my-modal-5" class="modal-toggle" />
+        <div class="modal">
+          <div class="modal-box p-6 w-4/6 max-w-5xl">
+            <label for="my-modal-5" class="btn btn-sm btn-circle absolute right-0 top-0">✕</label>
+            <!-- modal body  -->
+            <div class="flex justify-between items-center rounded-2xl gap-5">
+              <div class="w-1/2 bg-red-100 p-6 rounded-2xl">
+                <h3 class="font-bold text-left">${data.description}</h3>
+                <div class="flex justify-between items-center gap-3 my-5">
+                  <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[0].price}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[0].plan}</h6></div>
+                  <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[1].price}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[1].plan}</h6></div>
+                  <div class="bg-white p-5 rounded-2xl"><h6 class="text-xs font-bold text-blue-300 h-7">${data.pricing[2].price}</h6> <h6 class="text-xs font-bold text-blue-300">${data.pricing[2].plan}</h6></div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <h5 class="text-lg font-bold">Features</h5>
+                    <ul class="mt-3" id="modal-feature-first">
+                      <li>${data.features[1].feature_name}</li>
+                      <li>${data.features[2].feature_name}</li>
+                      <li>${data.features[3].feature_name}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5 class="text-lg font-bold">Integrations</h5>
+                    <ul>
+                      
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="w-1/2 rounded-2xl p-4 bg-slate-300">
+                <img class="h-2/3 rounded-2xl" src="${data.image_link[0]}" alt="">
+                <h5 class="text-lg font-bold text-center mt-2">${data.input_output_examples[0].input}</h5>
+                <p class="text-center mt-2">${data.input_output_examples[1].input}</p>
+              </div>
+            </div>
+            <!-- modal action button  -->
+            <div class="modal-action">
+            </div>
+          </div>
+        </div>
+    `;
+    modalContainer.appendChild(modalDiv);
+    
+}
+
+
+
 
 // loading function 
 const toggleSpinner = isLoading => {
